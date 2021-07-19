@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package service;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option go_package = "github.com/xdu31/exercise-service/pkg/server/pb/;pb";
+
+
+message GetExercisesForMuscleReq {
+  string muscle_name = 1;
+}
+
+message GetExercisesForMuscleResp {
+  repeated string results = 1;
+}
+
+message GetMusclesForExerciseReq {
+  string exercise_name = 1;
+}
+
+message GetMusclesForExerciseResp {
+  repeated string results = 1;
+}
+
+service exerciseService {
+  rpc GetExercisesForMuscle (GetExercisesForMuscleReq) returns (GetExercisesForMuscleResp) {
+    option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+      tags: "training";
+    };
+
+    option (google.api.http) = {
+        get: "/exercises_for_muscle/{muscle_name}"
+    };
+  }
+
+  rpc GetMusclesForExercise (GetMusclesForExerciseReq) returns (GetMusclesForExerciseResp) {
+      option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+        tags: "training";
+      };
+
+      option (google.api.http) = {
+          get: "/muscles_for_exercise/{exercise_name}"
+      };
+  }
+}

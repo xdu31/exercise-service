@@ -1,0 +1,43 @@
+# Default values for exercise-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+internalPort: 8081
+httpProtocol: TCP
+grpcProtocol: TCP
+replicaCount: 1
+
+env: env-1
+
+db:
+  user: test_user
+  port: "5432"
+  sslMode: disable
+  name: test
+  #TODO: should be in Vault
+  password: test_pass
+  test:
+    server: "test-{{ .Values.env }}.{{ .Values.db.serverDomain }}"
+  serverDomain: "xxxxxxxxxx.us-east-1.rds.amazonaws.com"
+
+image:
+  pullPolicy: Always
+
+  repository: xdu31
+
+  nameAPIService: exercise-service
+  nameMigration: exercise-service-db-migrate
+  tagService: ""
+
+host:
+  csp:
+    domain: env-1.test.domain.com
+
+service:
+  serviceName: exercise-service
+  ingress: /api/exercise-service/v1/
+  http:
+    name: http
+    port: 8081
+
+cspSecretName: csp-cert

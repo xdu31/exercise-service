@@ -1,0 +1,90 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "github.com/xdu31/exercise-service/pkg/server/pb/service.proto",
+    "version": "version not set"
+  },
+  "paths": {
+    "/exercises_for_muscle/{muscle_name}": {
+      "get": {
+        "tags": [
+          "training"
+        ],
+        "operationId": "trainingGetExercisesForMuscle",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "muscle_name",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GET operation response",
+            "schema": {
+              "$ref": "#/definitions/serviceGetExercisesForMuscleResp"
+            }
+          }
+        }
+      }
+    },
+    "/muscles_for_exercise/{exercise_name}": {
+      "get": {
+        "tags": [
+          "training"
+        ],
+        "operationId": "trainingGetMusclesForExercise",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "exercise_name",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GET operation response",
+            "schema": {
+              "$ref": "#/definitions/serviceGetMusclesForExerciseResp"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "serviceGetExercisesForMuscleResp": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "serviceGetMusclesForExerciseResp": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

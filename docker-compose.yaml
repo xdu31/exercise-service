@@ -1,0 +1,23 @@
+version: "3.4"
+services:
+  data:
+    image: exercise-service-db
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_pass
+      - POSTGRES_DB=test
+    ports:
+      - 5432:5432
+    container_name: exercise-service-db
+  service:
+    image: xdu31/exercise-service:latest
+    command:
+      - --database.name=test
+      - --database.user=test_user
+      - --database.password=test_pass
+      - --database.address=data
+    links:
+      - data
+    ports:
+      - 8081:8081
+    container_name: exercise-service
